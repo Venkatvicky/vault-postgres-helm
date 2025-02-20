@@ -23,8 +23,10 @@ vault:
   service:
     name: vault
     type: ClusterIP
-    port: 8200
-
+    port: 8200 
+ingress:
+    enabled: false  # ✅ Add this to avoid nil error
+    host: "vault.local"
 serviceAccount:
   create: true
   automount: true
