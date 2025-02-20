@@ -1,3 +1,8 @@
+service:
+  name: vault-postgres
+  type: ClusterIP
+  port: 5432  # ✅ Add this to prevent nil reference error
+
 global:
   storageClass: ""
 
@@ -11,7 +16,7 @@ postgresql:
   service:
     name: postgres
     type: ClusterIP
-    port: 5432  # ✅ Explicitly define the port
+    port: 5432  # ✅ Make sure this exists
 
 vault:
   image: "hashicorp/vault:latest"
@@ -19,11 +24,8 @@ vault:
     name: vault
     type: ClusterIP
     port: 8200
-  ingress:
-    enabled: false
-    host: "vault.local"
 
 serviceAccount:
-  create: true  # ✅ Fix for serviceAccount issue
-  automount: true  # ✅ Ensures automountServiceAccountToken works
-  annotations: {}  # ✅ Avoids nil reference error in templates
+  create: true
+  automount: true
+  annotations: {}
