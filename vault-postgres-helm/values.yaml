@@ -1,3 +1,5 @@
+global:
+  storageClass: ""
 postgresql:
   image: "postgres:15"
   database: "vault"
