@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "vault-postgres-helm.fullname" . }}-test-connection"
+  labels:
+    {{- include "vault-postgres-helm.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "vault-postgres-helm.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

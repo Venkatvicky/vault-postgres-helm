@@ -1,0 +1,23 @@
+global:
+  storageClass: ""
+
+postgresql:
+  image: "postgres:15"
+  database: "vaultdb"
+  user: "vaultuser"
+  password: "vaultpassword"
+  storage:
+    size: "10Gi"
+  service:
+    type: ClusterIP
+    port: 5432
+
+vault:
+  image: "hashicorp/vault:latest"
+  service:
+    type: ClusterIP
+    port: 8200
+  ingress:
+    enabled: true
+    host: "vault.example.com"
+    className: "nginx"
