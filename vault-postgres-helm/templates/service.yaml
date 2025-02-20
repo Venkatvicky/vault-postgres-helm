@@ -7,7 +7,7 @@ metadata:
 spec:
   type: {{ .Values.postgresql.service.type | default "ClusterIP" }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.postgresql.service.port | default 5432 }}  # ✅ Use correct path
       targetPort: http
       protocol: TCP
       name: http
