@@ -9,6 +9,7 @@ postgresql:
   storage:
     size: "10Gi"
   service:
+    name: postgres
     type: ClusterIP
     port: 5432
 
