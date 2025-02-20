@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "vault-postgres-helm.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ include "vault-postgres-helm.fullname" . }}:{{ .Values.postgresql.service.port }}']
   restartPolicy: Never
