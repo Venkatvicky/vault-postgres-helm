@@ -1,5 +1,6 @@
 global:
   storageClass: ""
+
 postgresql:
   image: "postgres:15"
   database: "vault"
@@ -21,3 +22,8 @@ vault:
   ingress:
     enabled: false
     host: "vault.local"
+
+serviceAccount:
+  create: true  # ✅ Fix for serviceAccount issue
+  automount: true  # ✅ Ensures automountServiceAccountToken works
+  annotations: {}  # ✅ Avoids nil reference error in templates
