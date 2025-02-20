@@ -8,5 +8,12 @@ spec:
   containers:
     - name: postgres-test
       image: postgres:15
-      command: ["sh", "-c", "PGPASSWORD={{ .Values.postgresql.password }} psql -h postgres -U {{ .Values.postgresql.user }} -d {{ .Values.postgresql.database }} -c 'SELECT 1'"]
+      command: ["sh", "-c", "PGPASSWORD=$(POSTGRES_PASSWORD) psql -h postgres -U $(POSTGRES_USER) -d $(POSTGRES_DB) -c 'SELECT 1'"]
+      env:
+        - name: POSTGRES_DB
+          value: "{{ .Values.postgresql.database }}"
+        - name: POSTGRES_USER
+          value: "{{ .Values.postgresql.user }}"
+        - name: POSTGRES_PASSWORD
+          value: "{{ .Values.postgresql.password }}"
   restartPolicy: Never
