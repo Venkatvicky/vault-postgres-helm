@@ -1,24 +1,21 @@
-global:
-  storageClass: ""
-
 postgresql:
   image: "postgres:15"
-  database: "vaultdb"
-  user: "vaultuser"
+  database: "vault"
+  user: "vault"
   password: "vaultpassword"
   storage:
     size: "10Gi"
   service:
     name: postgres
     type: ClusterIP
-    port: 5432
+    port: 5432  # ✅ Explicitly define the port
 
 vault:
   image: "hashicorp/vault:latest"
   service:
+    name: vault
     type: ClusterIP
     port: 8200
   ingress:
-    enabled: true
-    host: "vault.example.com"
-    className: "nginx"
+    enabled: false
+    host: "vault.local"
