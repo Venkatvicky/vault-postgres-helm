@@ -2,9 +2,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: vault-ingress
-  annotations:
-    kubernetes.io/ingress.class: "{{ .Values.vault.ingress.className }}"
+  name: {{ include "vault-postgres-helm.fullname" . }}
+  labels:
+    {{- include "vault-postgres-helm.labels" . | nindent 4 }}
 spec:
   rules:
     - host: {{ .Values.vault.ingress.host }}
@@ -14,7 +14,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: vault
+                name: {{ include "vault-postgres-helm.fullname" . }}
                 port:
                   number: {{ .Values.vault.service.port }}
 {{- end }}
